@@ -1,0 +1,89 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+import '../styles/global.css';
+import { APP_STORE_URL } from '../consts';
+
+interface Props {
+	title: string;
+	description: string;
+	canonicalPath?: string;
+}
+const { title, description, canonicalPath = Astro.url.pathname } = Astro.props;
+const canonical = new URL(canonicalPath, Astro.site);
+const socialImage = new URL('/social-card.png', Astro.site);
+const isHome = Astro.url.pathname === '/';
+const links = [
+	{ href: '/#features', label: 'Features' },
+	{ href: '/#pro', label: 'Free & Pro' },
+	{ href: '/support/', label: 'Support' },
+];
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#ffffff" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" type="image/png" href="/app-icon.png" />
+		<link rel="apple-touch-icon" href="/app-icon.png" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="ShotMark" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={socialImage} />
+		<meta property="og:image:alt" content="ShotMark, screenshot notes for iPhone, iPad and Mac" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={socialImage} />
+		{canonicalPath === '/404.html' && <meta name="robots" content="noindex" />}
+	</head>
+	<body>
+		<a class="skip-link" href="#main-content">Skip to content</a>
+		<header class="site-header">
+			<nav class="nav-bar wrap" aria-label="Main navigation">
+				<a class="brand" href="/" aria-label="ShotMark home" aria-current={isHome ? 'page' : undefined}>
+					<Image src={logo} width={36} height={36} alt="" format="webp" loading="eager" />
+					<span>ShotMark</span>
+				</a>
+				<div class="desktop-links">
+					{links.map(link => <a href={link.href} aria-current={Astro.url.pathname === link.href ? 'page' : undefined}>{link.label}</a>)}
+					<a class="button button-small" href={APP_STORE_URL}>Download <span aria-hidden="true">↗</span></a>
+				</div>
+				<details class="mobile-navigation">
+					<summary aria-label="Navigation menu"><span class="menu-lines" aria-hidden="true"></span></summary>
+					<div class="mobile-links">
+						{links.map(link => <a href={link.href}>{link.label}</a>)}
+						<a href="/privacy/">Privacy</a>
+						<a class="button" href={APP_STORE_URL}>Download ShotMark <span aria-hidden="true">↗</span></a>
+					</div>
+				</details>
+			</nav>
+		</header>
+		<slot />
+		<footer class="site-footer">
+			<div class="footer-inner wrap">
+				<div class="footer-brand"><a class="brand" href="/"><span>ShotMark</span></a><p>A little context goes a long way.</p></div>
+				<nav aria-label="Footer navigation">
+					<a href="/support/">Support</a><a href="/privacy/">Privacy</a><a href="/updates/">Updates</a><a href="/roadmap/">Roadmap</a>
+				</nav>
+			</div>
+			<div class="footer-bottom wrap"><span>© {new Date().getUTCFullYear()} Zhen Chyi Lee</span><a href="https://www.zhenchyi.com/">Made by Zhen Chyi <span aria-hidden="true">↗</span></a></div>
+		</footer>
+		<script>
+			const navigation = document.querySelector<HTMLDetailsElement>('.mobile-navigation');
+			navigation?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navigation.open = false; }));
+			document.addEventListener('keydown', event => {
+				if (event.key === 'Escape' && navigation?.open) {
+					navigation.open = false;
+					navigation.querySelector('summary')?.focus();
+				}
+			});
+		</script>
+	</body>
+</html>

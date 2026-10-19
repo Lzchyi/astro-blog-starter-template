@@ -1,50 +1,122 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { Image } from 'astro:assets';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import DeviceGallery from '../components/DeviceGallery.astro';
+import logo from '../assets/logo.png';
+import library from '../assets/iphone-library.png';
+import capture from '../assets/iphone-capture.png';
+import collections from '../assets/iphone-collections.png';
+import shareSheet from '../assets/iphone-share-sheet.png';
+import { SITE_TITLE, SITE_DESCRIPTION, APP_STORE_URL, MAC_STORE_URL } from '../consts';
+const structuredData = {
+  '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'ShotMark',
+  description: SITE_DESCRIPTION, operatingSystem: 'iOS, iPadOS, macOS',
+  applicationCategory: 'ProductivityApplication', url: 'https://shotmark.win/',
+  downloadUrl: APP_STORE_URL, image: 'https://shotmark.win/app-icon.png',
+  author: { '@type': 'Person', name: 'Zhen Chyi Lee', url: 'https://www.zhenchyi.com/' },
+};
 ---
+<SiteLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-heading">
+      <p class="eyebrow">Made for iPhone, iPad &amp; Mac</p>
+      <h1 id="hero-heading">Save the screenshot.<br />Keep the reason.</h1>
+      <p class="lede">Turn screenshots into useful memories.<br />A note, a little context, and a way back to what matters.</p>
+      <div class="hero-actions">
+        <a class="button" href={APP_STORE_URL}>Download ShotMark <span aria-hidden="true">↗</span></a>
+        <a class="text-link" href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a>
+      </div>
+      <p class="hero-footnote">Start free. One-time Pro purchase. No subscription.</p>
+      <div class="hero-product">
+        <div class="phone hero-phone">
+          <Image src={library} alt="ShotMark Library showing saved travel screenshots with titles and notes." width={760} widths={[380, 570, 760]} sizes="(max-width: 640px) 267px, 340px" format="webp" quality={88} loading="eager" fetchpriority="high" />
+        </div>
+      </div>
+    </section>
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+    <section class="workflow" id="how-it-works" aria-labelledby="workflow-heading">
+      <div class="wrap">
+        <h2 id="workflow-heading">From saved to remembered.</h2>
+        <div class="steps">
+          <div class="step"><span class="step-number" aria-hidden="true">01</span><div><h3>Save it.</h3><p>Send a screenshot to ShotMark from the iOS Share Sheet, or import from Photos.</p></div></div>
+          <div class="step"><span class="step-number" aria-hidden="true">02</span><div><h3>Add context.</h3><p>Keep the reason with a title, a note, a voice memo, or a reminder.</p></div></div>
+          <div class="step"><span class="step-number" aria-hidden="true">03</span><div><h3>Find it again.</h3><p>Browse your cards, search your notes, and pick up where you left off.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section wrap" id="features" aria-labelledby="capture-heading">
+      <div class="feature-spotlight">
+        <div class="feature-copy">
+          <p class="eyebrow">Capture with context</p>
+          <h2 id="capture-heading">Save it while the reason is fresh.</h2>
+          <p>See something worth keeping? Share it straight to ShotMark. Add a note and choose a Collection before you get back to what you were doing.</p>
+          <p style="margin-top:18px">The screenshot and the reason stay together. No more wondering what you meant to remember.</p>
+          <a class="text-link" href="/support/#saving">How to save from the Share Sheet <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="share-artwork">
+          <Image src={shareSheet} alt="ShotMark Share Sheet preview: save a screenshot and add a note without opening the main app." width={900} widths={[450, 680, 900]} sizes="(max-width: 640px) calc(100vw - 40px), 480px" format="webp" quality={86} loading="lazy" />
+        </div>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-panel">
+          <p class="eyebrow">A little more than an image</p>
+          <h3>Keep the thought<br />that made you save it.</h3>
+          <p>A quick note, a voice memo, a reminder. Add the context that makes a screenshot useful.</p>
+          <div class="panel-screen"><Image src={capture} alt="ShotMark Capture screen with a screenshot, title, note and reminder options." width={640} widths={[320, 640]} sizes="310px" format="webp" quality={86} loading="lazy" /></div>
+        </article>
+        <article class="feature-panel">
+          <p class="eyebrow">Room for your ideas</p>
+          <h3>A place for everything<br />worth coming back to.</h3>
+          <p>Keep related cards in Collections. Bring bigger plans together with Projects in ShotMark Pro.</p>
+          <div class="panel-screen"><Image src={collections} alt="A ShotMark Collection with related screenshot cards and notes." width={640} widths={[320, 640]} sizes="310px" format="webp" quality={86} loading="lazy" /></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="devices-section wrap" aria-labelledby="devices-heading">
+      <div class="section-heading"><p class="eyebrow">Your Apple devices</p><h2 id="devices-heading">At home on every screen.</h2><p class="lede">Capture on iPhone. Spread out on iPad. Revisit on Mac.<br />Your screenshot library, with room to think.</p></div>
+      <DeviceGallery />
+      <p class="device-caption">Optional iCloud sync with Pro on the platforms you use. <a href="/support/#icloud">About sync <span aria-hidden="true">↗</span></a><br />Product previews show illustrative sample content.</p>
+    </section>
+
+    <section class="privacy-section" aria-labelledby="privacy-heading">
+      <svg class="privacy-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="9" y="18" width="22" height="18" rx="5" stroke="currentColor" stroke-width="2"/><path d="M14 18v-6a6 6 0 0 1 12 0v6" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="26" r="2" fill="currentColor"/><path d="M20 28v3" stroke="currentColor" stroke-width="2"/></svg>
+      <h2 id="privacy-heading">Your screenshots.<br />Your space.</h2>
+      <p>Cards stay on your device by default. Text recognition happens on device. Optional iCloud sync uses your Apple account.</p>
+      <p style="margin-top:16px">No ShotMark account. No ads. No third-party tracking.</p>
+      <a class="text-link" href="/privacy/">Read our privacy policy <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="pro-section wrap" id="pro" aria-labelledby="pro-heading">
+      <div class="section-heading"><p class="eyebrow">Simple from the start</p><h2 id="pro-heading">Start free. Make room for more.</h2><p class="lede">Try the everyday essentials.<br />Unlock Pro with a one-time in-app purchase when you need it.</p></div>
+      <div class="plans">
+        <article class="plan"><h3>ShotMark</h3><p class="plan-label">A useful home for your screenshots.</p><ul><li>Save screenshots with notes</li><li>Voice memos and reminders</li><li>Collections and Grid/List browsing</li><li>Search titles, notes, and #tags</li><li>Detect and copy screenshot text</li><li>Up to 12 saved cards on iPhone and iPad</li></ul><a class="button button-outline" href={APP_STORE_URL}>Download for free <span aria-hidden="true">↗</span></a></article>
+        <article class="plan plan-pro"><h3>ShotMark Pro</h3><p class="plan-label">More room. One-time purchase. No subscription.</p><ul><li>Unlimited saved cards on iPhone and iPad</li><li>Projects for bigger plans</li><li>Search inside screenshot text</li><li>Optional iCloud sync</li><li>Watermark-free exports</li><li>Available as an in-app purchase</li></ul><a class="button" href={APP_STORE_URL}>Explore Pro in the app <span aria-hidden="true">↗</span></a></article>
+      </div>
+      <p class="plan-note">The free Mac app has no saved-card limit. Pro purchases for iPhone/iPad and Mac are separate. Check the app for current local prices and purchase options.</p>
+    </section>
+
+    <section class="faq-section wrap" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">A few things to know.</h2>
+      <details><summary>How do I save a screenshot to ShotMark?</summary><p>On iPhone or iPad, open the screenshot and tap Share, then choose ShotMark. You can add context before saving. You can also import screenshots from Photos in the app. <a class="text-link" href="/support/#saving">See saving help</a></p></details>
+      <details><summary>Can I search the text inside screenshots?</summary><p>All users can detect and copy text from screenshots. ShotMark Pro adds searching inside that recognized text. Searching titles, notes, and #tags is available for free.</p></details>
+      <details><summary>Is ShotMark a subscription?</summary><p>No. Start with the free app, then unlock Pro through a one-time in-app purchase. The iPhone/iPad and Mac Pro purchases are separate. See current purchase options in the app.</p></details>
+      <details><summary>Do I need a ShotMark account?</summary><p>No ShotMark account is required. Your cards are stored on device by default. Optional iCloud sync uses your Apple account and requires Pro on the platforms you use.</p></details>
+    </section>
+
+    <section class="download-section" aria-labelledby="download-heading">
+      <Image src={logo} alt="" width={136} height={136} format="webp" loading="lazy" />
+      <h2 id="download-heading">Remember why you saved it.</h2>
+      <p class="lede">Give your screenshots a little context.</p>
+      <div class="download-actions"><a class="button" href={APP_STORE_URL}>Download for iPhone &amp; iPad <span aria-hidden="true">↗</span></a><a class="button button-outline" href={MAC_STORE_URL}>Download for Mac <span aria-hidden="true">↗</span></a></div>
+      <p class="small-note">Available on the App Store. Free to start.</p>
+    </section>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+</SiteLayout>
+<style>
+  .share-artwork{background:#f6f3fb;border-radius:var(--radius);overflow:hidden;max-height:650px;display:flex;align-items:center;justify-content:center}
+  .share-artwork img{width:100%;height:auto;max-height:650px;object-fit:contain}
+  @media(max-width:640px){.share-artwork{border-radius:25px;max-height:660px}.share-artwork img{max-height:660px}}
+</style>
