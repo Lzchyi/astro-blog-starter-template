@@ -1,64 +1,37 @@
-# Astro Starter Kit: Blog
+# ShotMark website
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/astro-blog-starter-template)
+Minimalist, responsive marketing site for ShotMark on iPhone, iPad and Mac. Built with the existing Astro starter and deployed as static assets through the owner's existing Cloudflare Worker and GitHub connection.
 
-![Astro Template Preview](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+## Development
 
-<!-- dash-content-start -->
+Node.js 22 or later.
 
-Create a blog with Astro and deploy it on Cloudflare Workers as a [static website](https://developers.cloudflare.com/workers/static-assets/).
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-- ✅ Built-in Observability logging
-
-<!-- dash-content-end -->
-
-## Getting Started
-
-Outside of this repo, you can start a new project with this template using [C3](https://developers.cloudflare.com/pages/get-started/c3/) (the `create-cloudflare` CLI):
-
-```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/astro-blog-starter-template
+```sh
+npm ci
+npm run dev
 ```
 
-A live public deployment of this template is available at [https://astro-blog-starter-template.templates.workers.dev](https://astro-blog-starter-template.templates.workers.dev)
+## Verification and local preview
 
-## 🚀 Project Structure
+```sh
+npm run check
+npm run preview -- --port 4321
+```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+The check builds all pages and optimized images, type-checks TypeScript, validates generated local links/anchors/assets/metadata, and runs a Wrangler deployment dry run. Browser QA covers desktop and mobile layouts, mobile navigation, keyboard device tabs, FAQs, and the actual Cloudflare 404 response.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Publishing
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+The existing Cloudflare Workers Builds connection watches `main`, runs `npm run build`, then `npm run deploy`. Preserve the existing Worker name in `wrangler.json` unless the dashboard binding is changed too. `dist/` contains static HTML and assets with a custom `404.html`. Custom domains are attached in the Cloudflare dashboard.
 
-Any static assets, like images, can be placed in the `public/` directory.
+Canonical: https://shotmark.win/. The new site includes home, support, privacy, updates, and roadmap. See ASSETS.md for provenance and screenshot fidelity. Product previews use illustrative sample content; replace with authentic physical-device demo captures during a future fidelity refresh.
 
-## 🧞 Commands
+## Scope and sources
 
-All commands are run from the root of the project, from a terminal:
+- Current website and privacy: https://www.zhenchyi.com/shotmark/ and https://www.zhenchyi.com/shotmark/privacy/
+- Support and roadmap: https://www.zhenchyi.com/support/ and https://www.zhenchyi.com/shotmark/roadmap/
+- App Store: https://apps.apple.com/app/id6761759060
+- Existing English 2.0 copy and screenshot assets supplied by the owner.
+- Prior ShotMark marketing work: emphasize the Share Sheet and remember why you saved it.
 
-| Command                           | Action                                           |
-| :-------------------------------- | :----------------------------------------------- |
-| `npm install`                     | Installs dependencies                            |
-| `npm run dev`                     | Starts local dev server at `localhost:4321`      |
-| `npm run build`                   | Build your production site to `./dist/`          |
-| `npm run preview`                 | Preview your build locally, before deploying     |
-| `npm run astro ...`               | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help`         | Get help using the Astro CLI                     |
-| `npm run build && npm run deploy` | Deploy your production site to Cloudflare        |
-| `npm wrangler tail`               | View real-time logs for all Workers              |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+The native apps, App Store Connect metadata, and legacy-site forwarding are deferred to the next app build. No app data moves as part of this website launch. No analytics, external fonts, or tracking scripts are added.
