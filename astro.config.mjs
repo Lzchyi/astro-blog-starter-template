@@ -7,7 +7,7 @@ export default defineConfig({
   site: "https://shotmark.win",
   output: "static",
   trailingSlash: "always",
-  integrations: [sitemap({ filter: (page) => !page.endsWith("/404/") })],
+  integrations: [sitemap({ filter: (page) => !page.endsWith("/404/") && !page.endsWith("/updates/") })],
   image: { service: { entrypoint: "astro/assets/services/sharp" } },
   devToolbar: { enabled: false },
 });

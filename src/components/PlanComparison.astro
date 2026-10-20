@@ -1,0 +1,27 @@
+---
+import { APP_STORE_URL } from '../consts';
+const features = [
+  { name: 'Saved cards on iPhone & iPad', free: '12 cards', pro: 'Unlimited' },
+  { name: 'Saved cards on Mac', free: 'Unlimited', pro: 'Unlimited' },
+  { name: 'Notes, voice memos & reminders', free: 'Included', pro: 'Included' },
+  { name: 'Collections', free: 'Included', pro: 'Included' },
+  { name: 'Grid & List browsing', free: 'Included', pro: 'Included' },
+  { name: 'Search titles, notes & #tags', free: 'Included', pro: 'Included' },
+  { name: 'Pin, Archive & bulk Collection moves', free: 'Included', pro: 'Included' },
+  { name: 'Projects', free: '—', pro: 'Included' },
+  { name: 'Search text inside screenshots', free: '—', pro: 'Included' },
+  { name: 'Optional iCloud sync', free: '—', pro: 'Included' },
+  { name: 'Screenshot exports', free: 'Watermarked', pro: 'Watermark-free' },
+];
+---
+<div class="comparison">
+  <table>
+    <caption class="visually-hidden">Compare ShotMark Free and Pro</caption>
+    <thead><tr><td></td><th scope="col"><span class="plan-name">Free</span><span class="plan-description">The everyday essentials.</span></th><th scope="col"><span class="plan-name">Pro<span class="pro-dot" aria-hidden="true"></span></span><span class="plan-description">More room. More possibilities.</span></th></tr></thead>
+    <tbody>
+      {features.map(feature => <tr><th scope="row">{feature.name}</th><td>{feature.free === '—' ? <><span class="visually-hidden">Not included</span><span aria-hidden="true">—</span></> : feature.free}</td><td>{feature.pro}</td></tr>)}
+    </tbody>
+  </table>
+  <div class="comparison-bottom"><p>Start free. Unlock Pro once.<br /><span>No subscription.</span></p><a class="button" href={APP_STORE_URL}>Get ShotMark <span aria-hidden="true">↗</span></a></div>
+</div>
+<p class="plan-note">The 12-card limit on iPhone and iPad includes archived cards. Choose iPhone &amp; iPad Pro, Mac Pro, or All Platforms Pro in the app. Features apply to the platforms covered by your purchase. See the app for current options and local prices.</p>
