@@ -4,7 +4,8 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 // Dates and summaries checked against the public iPhone/iPad App Store history
 // on 20 October 2026. The exact 2.1 timestamp is from Apple's public lookup API:
 // https://itunes.apple.com/lookup?id=6761759060&country=us
-const releases = [
+// Mac dates and notes are from the public Mac App Store's versionHistory data.
+const mobileReleases = [
   {
     version: '2.1', date: '2026-10-19T16:06:09Z', dateLabel: '19 October 2026',
     title: 'A little less clutter.',
@@ -49,6 +50,27 @@ const releases = [
     changes: ['ShotMark launched on the App Store.'],
   },
 ];
+
+const macReleases = [
+  {
+    version: '2.1', date: '2026-10-20T02:03:51Z', dateLabel: '20 October 2026',
+    title: 'A tidier library on Mac.',
+    changes: [
+      'Pin, archive, and manage multiple cards together. Move cards into Collections, or organise them in Projects with Pro. Refined context menus.',
+      'Added All Platforms Pro and eligible owner offers.',
+    ],
+  },
+  {
+    version: '1.3.2', date: '2026-08-16T01:54:20Z', dateLabel: '16 August 2026',
+    title: 'ShotMark for Mac.',
+    changes: ['Released on the Mac App Store.'],
+  },
+];
+
+const releaseGroups = [
+  { id: 'mobile-releases', title: 'iPhone & iPad', releases: mobileReleases },
+  { id: 'mac-releases', title: 'Mac', releases: macReleases },
+];
 ---
 
 <SiteLayout title="ShotMark Changelog" description="ShotMark release notes, from the first launch to the latest improvements in screenshot capture, organisation, and recall." canonicalPath="/changelog/">
@@ -57,18 +79,24 @@ const releases = [
       <p class="eyebrow">Changelog</p>
       <h1>Small updates.<br />Useful improvements.</h1>
       <p class="lede">From the first saved screenshot to a more organised library. Here’s how ShotMark has grown.</p>
+      <nav class="release-navigation" aria-label="Release history by platform"><a href="#mobile-releases">iPhone &amp; iPad</a><a href="#mac-releases">Mac</a></nav>
+      <p class="small-note">Release dates shown in UTC.</p>
     </header>
 
     <div class="prose">
-      <p class="history-context">iPhone &amp; iPad release history</p>
-      {releases.map((release, index) => (
-        <section class="release" aria-labelledby={`version-${release.version.replaceAll('.', '-')}`}>
-          <div class="release-meta">
-            <p class="eyebrow">Version {release.version}{index === 0 && <span class="latest-label">Latest</span>}</p>
-            <time datetime={release.date}>{release.dateLabel}</time>
-          </div>
-          <h2 id={`version-${release.version.replaceAll('.', '-')}`}>{release.title}</h2>
-          {release.changes.map(change => <p>{change}</p>)}
+      {releaseGroups.map(group => (
+        <section class="platform-history" aria-labelledby={group.id}>
+          <h2 id={group.id}>{group.title}</h2>
+          {group.releases.map((release, index) => (
+            <section class="release" aria-labelledby={`${group.id}-version-${release.version.replaceAll('.', '-')}`}>
+              <div class="release-meta">
+                <p class="eyebrow">Version {release.version}{index === 0 && <span class="latest-label">Latest</span>}</p>
+                <time datetime={release.date}>{release.dateLabel}</time>
+              </div>
+              <h3 id={`${group.id}-version-${release.version.replaceAll('.', '-')}`}>{release.title}</h3>
+              {release.changes.map(change => <p>{change}</p>)}
+            </section>
+          ))}
         </section>
       ))}
 
@@ -82,11 +110,15 @@ const releases = [
 </SiteLayout>
 
 <style>
-  .history-context { font-size: 14px; }
+  .release-navigation { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 28px; font-size: 14px; color: var(--purple); }
+  .release-navigation a { text-decoration: underline; text-underline-offset: 4px; }
+  .platform-history + .platform-history { margin-top: 75px; }
+  .platform-history > h2 { margin-bottom: 10px; font-size: 32px; }
+  .platform-history .release:first-of-type { margin-top: 20px; }
   .release-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; }
   .release-meta .eyebrow { margin-bottom: 0; }
   .release-meta time { margin-top: 14px; }
-  .release h2 { margin-top: 18px; }
+  .release h3 { margin-top: 18px; font-size: 29px; letter-spacing: -.035em; }
   .latest-label { display: inline-block; margin-left: 12px; padding: 3px 8px; border-radius: 100px; background: var(--soft); font-size: 10px; letter-spacing: .04em; vertical-align: middle; }
   @media (max-width: 560px) {
     .release-meta { align-items: flex-start; flex-direction: column; gap: 0; }

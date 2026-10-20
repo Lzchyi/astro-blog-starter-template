@@ -31,7 +31,7 @@ Canonical: https://shotmark.win/. Pages include home, support, privacy, changelo
 - Current website and privacy: https://www.zhenchyi.com/shotmark/ and https://www.zhenchyi.com/shotmark/privacy/
 - Support and roadmap: https://www.zhenchyi.com/support/ and https://www.zhenchyi.com/shotmark/roadmap/
 - App Store: https://apps.apple.com/app/id6761759060
-- Public App Store history through mobile 2.1, checked 20 October 2026. Apple's public lookup API confirms the 2.1 release timestamp as `2026-10-19T16:06:09Z`.
+- Public App Store history through mobile and Mac 2.1, checked 20 October 2026. Apple's public lookup API confirms the mobile 2.1 timestamp as `2026-10-19T16:06:09Z`; Mac App Store embedded version-history metadata confirms Mac 2.1 as `2026-10-20T02:03:51Z`.
 - Existing screenshot assets supplied by the owner. Current mobile claims and Mac claims are verified separately; never infer shipping behavior from pending native changes.
 - Prior ShotMark marketing work: emphasize the Share Sheet and remember why you saved it.
 

@@ -607,13 +607,6 @@ summary:focus-visible {
 .comparison tbody th {
   font-weight: 500;
 }
-.comparison small {
-  display: block;
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 400;
-}
 .plan-name {
   display: inline-flex;
   align-items: center;
