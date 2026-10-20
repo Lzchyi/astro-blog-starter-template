@@ -1,0 +1,20 @@
+---
+// To regenerate: copy to src/pages/social-preview.astro, open /social-preview/,
+// capture the 1200×630 card as JPEG, then remove the temporary page.
+import { Image } from 'astro:assets';
+import PhoneMockup from '../components/PhoneMockup.astro';
+import logo from '../assets/logo.png';
+import library from '../assets/iphone-library.png';
+import '../styles/global.css';
+---
+<!doctype html><html lang="en"><head><meta charset="UTF-8" /><title>ShotMark sharing preview</title></head><body>
+<main class="social-card"><div class="social-copy"><div class="social-brand"><Image src={logo} width={64} height={64} alt="" /><span>ShotMark</span></div><h1>Save the screenshot.<br />Keep the reason.</h1><p>A little context goes a long way.</p><div class="social-footer"><span>iPhone · iPad · Mac</span><span>shotmark.win</span></div></div><PhoneMockup src={library} alt="ShotMark travel library" eager sizes="300px" /></main>
+</body></html>
+<style>
+.social-card{width:1200px;height:630px;overflow:hidden;position:relative;background:#faf9fc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1d1d1f}
+.social-copy{position:absolute;left:70px;top:65px;width:720px}
+.social-brand{display:flex;align-items:center;gap:17px;font-size:30px;font-weight:650;letter-spacing:-1px}.social-brand img{width:64px;height:64px;border-radius:15px}
+h1{font-size:64px;line-height:1.08;letter-spacing:-3px;margin:61px 0 26px}p{font-size:25px;color:#626269}
+.social-footer{display:flex;gap:32px;font-size:16px;margin-top:77px;color:#626269}.social-footer span:last-child{color:#7040d8}
+.social-card :global(.phone){position:absolute;width:300px;right:60px;top:65px;transform:rotate(7deg)}
+</style>

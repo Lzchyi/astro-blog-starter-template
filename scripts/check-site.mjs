@@ -23,11 +23,15 @@ const pages = new Map(
 );
 assert.equal(
   htmlFiles.length,
-  6,
-  "Home, support, privacy, updates, roadmap and 404 must be built.",
+  8,
+  "Home, support, privacy, changelog, about, roadmap, updates redirect and 404 must be built.",
 );
 for (const [file, html] of pages) {
   const label = path.relative(root, file);
+  if (label === 'updates/index.html') {
+    assert(html.includes('/changelog/'), 'Updates redirects to the Changelog.');
+    continue;
+  }
   assert.equal(
     (html.match(/<h1(?:\s|>)/g) ?? []).length,
     1,
@@ -97,6 +101,8 @@ assert(
   !(await readFile(path.join(root, "sitemap-0.xml"), "utf8")).includes("404"),
   "404 excluded from sitemap.",
 );
+const redirects = await readFile(path.join(root, '_redirects'), 'utf8');
+assert(redirects.includes('/updates/ /changelog/ 301'), 'Cloudflare preserves the old Updates address.');
 console.log(
   `PASS: ${htmlFiles.length} pages; local links, anchors, assets, metadata, image dimensions, and 404 indexing.`,
 );

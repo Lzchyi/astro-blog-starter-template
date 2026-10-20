@@ -1,0 +1,95 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+// Dates and summaries checked against the public iPhone/iPad App Store history
+// on 20 October 2026. The exact 2.1 timestamp is from Apple's public lookup API:
+// https://itunes.apple.com/lookup?id=6761759060&country=us
+const releases = [
+  {
+    version: '2.1', date: '2026-10-19T16:06:09Z', dateLabel: '19 October 2026',
+    title: 'A little less clutter.',
+    changes: [
+      'Archive and restore cards. Manage several cards together, with clearer menus and appearance controls.',
+      'Added All Platforms Pro and eligible owner offers.',
+    ],
+  },
+  {
+    version: '2.0', date: '2026-09-21', dateLabel: '21 September 2026',
+    title: 'More room to organise.',
+    changes: ['Projects with Pro, Grid and List browsing, pins, and a layout made for iPad. Sharper thumbnails and appearance refinements.'],
+  },
+  {
+    version: '1.3.2', date: '2026-08-11', dateLabel: '11 August 2026',
+    title: 'Sharing, syncing, and more languages.',
+    changes: ['Fixed syncing for Share Sheet saves. Added six languages and polished Chinese translations, layouts, and update introductions.'],
+  },
+  {
+    version: '1.3.1', date: '2026-06-05', dateLabel: '5 June 2026',
+    title: 'A steadier library across devices.',
+    changes: ['Improved iCloud reliability, deletion handling, and synced file updates.'],
+  },
+  {
+    version: '1.3', date: '2026-05-19', dateLabel: '19 May 2026',
+    title: 'Your screenshots, together.',
+    changes: ['Added optional Pro iCloud sync and Chinese localisation. Improved text recognition and Settings.'],
+  },
+  {
+    version: '1.2', date: '2026-05-01', dateLabel: '1 May 2026',
+    title: 'Find it. Reuse it. Share it.',
+    changes: ['Added screenshot text search, text copying, and card image exports. Refined capture and editing.'],
+  },
+  {
+    version: '1.1', date: '2026-04-19', dateLabel: '19 April 2026',
+    title: 'A home for related screenshots.',
+    changes: ['Collections, library search, date filters, timeline groups, and multi-image cards. Better previews and Share Sheet saving.'],
+  },
+  {
+    version: '1.0', date: '2026-04-09', dateLabel: '9 April 2026',
+    title: 'The first chapter.',
+    changes: ['ShotMark launched on the App Store.'],
+  },
+];
+---
+
+<SiteLayout title="ShotMark Changelog" description="ShotMark release notes, from the first launch to the latest improvements in screenshot capture, organisation, and recall." canonicalPath="/changelog/">
+  <main id="main-content" class="document-page wrap">
+    <header class="page-intro">
+      <p class="eyebrow">Changelog</p>
+      <h1>Small updates.<br />Useful improvements.</h1>
+      <p class="lede">From the first saved screenshot to a more organised library. Here’s how ShotMark has grown.</p>
+    </header>
+
+    <div class="prose">
+      <p class="history-context">iPhone &amp; iPad release history</p>
+      {releases.map((release, index) => (
+        <section class="release" aria-labelledby={`version-${release.version.replaceAll('.', '-')}`}>
+          <div class="release-meta">
+            <p class="eyebrow">Version {release.version}{index === 0 && <span class="latest-label">Latest</span>}</p>
+            <time datetime={release.date}>{release.dateLabel}</time>
+          </div>
+          <h2 id={`version-${release.version.replaceAll('.', '-')}`}>{release.title}</h2>
+          {release.changes.map(change => <p>{change}</p>)}
+        </section>
+      ))}
+
+      <section class="section contact-card" aria-labelledby="release-details-title">
+        <h2 id="release-details-title">The details for your device.</h2>
+        <p>Versions and release dates can differ by platform. See the full notes on the <a href="https://apps.apple.com/us/app/shotmark-screenshot-memory/id6761759060">iPhone and iPad App Store</a> or the <a href="https://apps.apple.com/us/app/shotmark-screenshot-memory/id6761759060?platform=mac">Mac App Store</a>.</p>
+        <p>Looking ahead? The <a href="/roadmap/">Roadmap</a> shares our priorities for future updates.</p>
+      </section>
+    </div>
+  </main>
+</SiteLayout>
+
+<style>
+  .history-context { font-size: 14px; }
+  .release-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; }
+  .release-meta .eyebrow { margin-bottom: 0; }
+  .release-meta time { margin-top: 14px; }
+  .release h2 { margin-top: 18px; }
+  .latest-label { display: inline-block; margin-left: 12px; padding: 3px 8px; border-radius: 100px; background: var(--soft); font-size: 10px; letter-spacing: .04em; vertical-align: middle; }
+  @media (max-width: 560px) {
+    .release-meta { align-items: flex-start; flex-direction: column; gap: 0; }
+    .release-meta time { margin-top: 5px; }
+  }
+</style>

@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
+import PhoneMockup from './PhoneMockup.astro';
 import library from '../assets/iphone-library.png';
 import ipad from '../assets/ipad-library.png';
-import mac from '../assets/mac-preview.png';
+import mac from '../assets/mac-native-demo.png';
 ---
 <div class="device-gallery">
   <div class="device-tabs" role="tablist" aria-label="Choose an Apple device">
@@ -11,13 +12,13 @@ import mac from '../assets/mac-preview.png';
     <button id="tab-mac" type="button" role="tab" aria-selected="false" aria-controls="panel-mac" tabindex="-1" data-device="mac">Mac</button>
   </div>
   <div class="device-stage" id="panel-iphone" role="tabpanel" aria-labelledby="tab-iphone" tabindex="0">
-    <div class="phone"><Image src={library} alt="ShotMark iPhone demo showing a compact list of screenshot cards and notes." width={640} widths={[320,640]} sizes="230px" format="webp" quality={85} loading="lazy" /></div>
+    <PhoneMockup src={library} alt="ShotMark iPhone demo showing a compact list of screenshot cards and notes." sizes="(max-width:640px) 206px, 230px" />
   </div>
   <div class="device-stage" id="panel-ipad" role="tabpanel" aria-labelledby="tab-ipad" tabindex="0" hidden>
     <Image class="tablet" src={ipad} alt="ShotMark iPad demo with a spacious library layout for browsing screenshot cards." width={1600} widths={[650,1100,1600]} sizes="(max-width:640px) calc(100vw - 70px), 810px" format="webp" quality={87} loading="lazy" />
   </div>
   <div class="device-stage" id="panel-mac" role="tabpanel" aria-labelledby="tab-mac" tabindex="0" hidden>
-    <Image src={mac} alt="ShotMark Mac promotional artwork showing watched-folder screenshot review with sample content." width={1600} widths={[650,1100,1600]} sizes="(max-width:640px) calc(100vw - 70px), 1000px" format="webp" quality={87} loading="lazy" />
+    <Image class="mac-preview" src={mac} alt="ShotMark Mac app preview with a fictional Kyoto travel library, native sidebar, search, and screenshot grid." width={1600} widths={[650,1100,1600]} sizes="(max-width:640px) calc(100vw - 70px), 1000px" format="webp" quality={90} loading="lazy" />
   </div>
 </div>
 <script>

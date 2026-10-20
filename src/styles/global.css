@@ -298,20 +298,30 @@ summary:focus-visible {
   pointer-events: none;
 }
 .phone {
+  position: relative;
   width: 302px;
-  border: 7px solid #242427;
-  border-radius: 43px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow:
-    0 0 0 1px #6b6b73,
-    0 0 0 3px #d9d9df,
-    0 22px 60px #29233917;
+  aspect-ratio: 1470 / 3000;
+  filter: drop-shadow(0 20px 24px #29233914);
   flex-shrink: 0;
 }
-.phone img {
+.phone .phone-screen {
+  position: absolute;
+  left: 5.10204%;
+  top: 2.2%;
+  width: 89.79592%;
+  height: 95.6%;
+  max-height: none;
+  border-radius: 14.4% / 6.63%;
+  object-fit: cover;
+}
+.phone .phone-bezel {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  height: auto;
+  height: 100%;
+  max-height: none;
+  border-radius: 0;
+  pointer-events: none;
 }
 .hero-phone {
   width: 320px;
@@ -413,6 +423,12 @@ summary:focus-visible {
   line-height: 1.6;
   margin-top: 18px;
 }
+.screen-caption {
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+  margin-top: 12px;
+}
 .feature-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -440,13 +456,8 @@ summary:focus-visible {
   max-width: 310px;
   height: 385px;
   overflow: hidden;
-  border: 1px solid #dddde3;
-  border-bottom: 0;
-  border-radius: 25px 25px 0 0;
-  box-shadow: 0 10px 35px #2221;
-  background: #fff;
 }
-.panel-screen img {
+.panel-screen .phone {
   width: 100%;
 }
 .devices-section {
@@ -503,6 +514,10 @@ summary:focus-visible {
   border-radius: 24px;
   box-shadow: 0 20px 40px #24202b12;
 }
+.device-stage .mac-preview {
+  box-shadow: 0 16px 42px #24202b16;
+  border: 1px solid #dedee4;
+}
 .device-stage .phone {
   width: 230px;
 }
@@ -543,50 +558,99 @@ summary:focus-visible {
 .pro-section {
   padding: 100px 0;
 }
-.plans {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  max-width: 900px;
-  margin: auto;
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
-.plan {
+.comparison {
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 38px;
+  max-width: 940px;
+  margin: auto;
+  overflow: hidden;
 }
-.plan-pro {
+.comparison table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+}
+.comparison th,
+.comparison td {
+  padding: 20px 28px;
+  line-height: 1.5;
+  font-weight: 400;
+  text-align: center;
+}
+.comparison tr > :first-child {
+  width: 46%;
+  text-align: left;
+}
+.comparison tr > :last-child {
   background: #faf8ff;
-  border-color: #e3d8f9;
+  color: #6332c2;
 }
-.plan h3 {
-  font-size: 30px;
-  margin-bottom: 12px;
+.comparison thead th {
+  padding-top: 30px;
+  padding-bottom: 27px;
 }
-.plan-label {
-  font-size: 14px;
+.comparison tbody tr {
+  border-top: 1px solid var(--line);
+}
+.comparison tbody th {
+  font-weight: 500;
+}
+.comparison small {
+  display: block;
+  margin-top: 3px;
   color: var(--muted);
-  min-height: 48px;
+  font-size: 11px;
+  font-weight: 400;
 }
-.plan ul {
-  list-style: none;
-  padding: 0;
-  margin: 28px 0;
-  font-size: 15px;
+.plan-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 26px;
+  font-weight: 650;
+  letter-spacing: -0.045em;
 }
-.plan li {
-  padding: 11px 0 11px 24px;
-  position: relative;
-  line-height: 1.4;
+.plan-description {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
 }
-.plan li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: var(--purple);
+.pro-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--purple);
 }
-.plan .button {
-  font-size: 14px;
+.comparison-bottom {
+  border-top: 1px solid var(--line);
+  padding: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.comparison-bottom p {
+  font-size: 16px;
+  font-weight: 550;
+  line-height: 1.6;
+}
+.comparison-bottom p span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 400;
 }
 .plan-note {
   text-align: center;
@@ -802,14 +866,8 @@ summary:focus-visible {
     min-height: 350px;
     padding: 28px;
   }
-  .plans {
-    gap: 18px;
-  }
-  .plan {
-    padding: 30px;
-  }
 }
-@media (max-width: 640px) {
+@media (max-width: 760px) {
   html {
     scroll-padding-top: 82px;
   }
@@ -889,6 +947,8 @@ summary:focus-visible {
   .mobile-links .button {
     margin-top: 12px;
   }
+}
+@media (max-width: 640px) {
   .hero {
     padding: 49px 18px 0;
   }
@@ -928,8 +988,6 @@ summary:focus-visible {
   }
   .hero-phone {
     width: 267px;
-    border-width: 6px;
-    border-radius: 36px;
   }
   .workflow {
     padding: 49px 0;
@@ -1031,8 +1089,6 @@ summary:focus-visible {
   }
   .device-stage .phone {
     width: 206px;
-    border-width: 5px;
-    border-radius: 30px;
   }
   .device-stage img {
     max-height: 440px;
@@ -1052,18 +1108,41 @@ summary:focus-visible {
   .pro-section {
     padding: 70px 0;
   }
-  .plans {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .comparison {
+    border-radius: 20px;
   }
-  .plan {
-    padding: 31px;
+  .comparison table {
+    font-size: 12px;
   }
-  .plan-label {
-    min-height: 0;
+  .comparison th,
+  .comparison td {
+    padding: 16px 9px;
+    overflow-wrap: anywhere;
   }
-  .plan ul {
-    margin: 22px 0;
+  .comparison tr > :first-child {
+    width: 44%;
+    padding-left: 15px;
+  }
+  .comparison thead th {
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+  .plan-name {
+    font-size: 23px;
+  }
+  .plan-description {
+    display: none;
+  }
+  .comparison-bottom {
+    padding: 21px 16px;
+    gap: 12px;
+  }
+  .comparison-bottom p {
+    font-size: 13px;
+  }
+  .comparison-bottom .button {
+    padding: 12px 15px;
+    font-size: 12px;
   }
   .plan-note {
     text-align: left;
