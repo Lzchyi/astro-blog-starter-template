@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import PhoneMockup from './PhoneMockup.astro';
 import library from '../assets/iphone-library.png';
-import ipad from '../assets/ipad-library.png';
+import ipad from '../assets/ipad-library-light.png';
 import mac from '../assets/mac-native-demo.png';
 ---
 <div class="device-gallery">
@@ -15,7 +15,7 @@ import mac from '../assets/mac-native-demo.png';
     <PhoneMockup src={library} alt="ShotMark iPhone demo showing a compact list of screenshot cards and notes." sizes="(max-width:640px) 206px, 230px" />
   </div>
   <div class="device-stage" id="panel-ipad" role="tabpanel" aria-labelledby="tab-ipad" tabindex="0" hidden>
-    <Image class="tablet" src={ipad} alt="ShotMark iPad demo with a spacious library layout for browsing screenshot cards." width={1600} widths={[650,1100,1600]} sizes="(max-width:640px) calc(100vw - 70px), 810px" format="webp" quality={87} loading="lazy" />
+    <Image class="tablet" src={ipad} alt="ShotMark iPad in light appearance, with Kyoto Weekend selected and its screenshot, title, and note visible in the detail pane." width={1600} widths={[650,1100,1600]} sizes="(max-width:640px) calc(100vw - 70px), 810px" format="webp" quality={87} loading="lazy" />
   </div>
   <div class="device-stage" id="panel-mac" role="tabpanel" aria-labelledby="tab-mac" tabindex="0" hidden>
     <Image class="mac-preview" src={mac} alt="ShotMark Mac app preview with a fictional Kyoto travel library, native sidebar, search, and screenshot grid." width={1600} widths={[650,1100,1600]} sizes="(max-width:640px) calc(100vw - 70px), 1000px" format="webp" quality={90} loading="lazy" />
